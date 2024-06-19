@@ -12,17 +12,20 @@ for arquivo in dados:
         tabela_Vendas = tabela_Vendas._append(tabela) # Todas as bases de vendas unificadas em uma
 
  # 1º objetivo - Calcular o produto mais vendido em quantidade
+print('\n\033[32mProduto mais vendido em quantidade\033[m\n')
 tabela_Produtos = tabela_Vendas.groupby('Produto').sum() # Agrupa as células usando 'Produtos' como index e somando as restantes
 tabela_Produtos = tabela_Produtos[['Quantidade Vendida']].sort_values(by='Quantidade Vendida',ascending=False) # Apresenta a tabela com o index ('Produtos') e 'Quantidade Vendida' e, organiza em ordem decrescente.
 display(tabela_Produtos)
 
 # 2º objetivo - Calcular o produto mais vendido em faturamento
+print('\n\033[32mProduto mais vendido em faturamento\033[m\n')
 tabela_Vendas['Faturamento'] = tabela_Vendas['Quantidade Vendida'] * tabela_Vendas['Preco Unitario'] # Faturamento do produto = preço x quantidade
 tabela_Faturamento = tabela_Vendas.groupby('Produto').sum()
 tabela_Faturamento = tabela_Faturamento[['Faturamento']].sort_values(by='Faturamento',ascending=False)
 display(tabela_Faturamento)
 
 # 3º objetivo - Calcular a loja/cidade que mais vende em faturamento
+print('\n\033[32mLoja que mais faturou\033[m\n')
 tabela_Lojas = tabela_Vendas.groupby('Loja').sum()
 tabela_Lojas = tabela_Lojas[['Faturamento']].sort_values(by='Faturamento',ascending=False)
 display(tabela_Lojas)
